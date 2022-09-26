@@ -27,9 +27,9 @@ Last time, headquarters told us that one of our spies had leaked sensitive, top-
 
 ### What’s Next:
 
-We have successfully identified the mule and have alerted our spy network! In an unfortunate turn of events, the mule happens to be our partner, Agent X, and now we are being suspected as a traitor as well. Since we are highly skilled, Headquarters knows what the Lie Detector won’t work on us, but we have been placed off-duty until we can prove that we are innocent.
+We have successfully identified the mule and have alerted our spy network! In an unfortunate turn of events, the mule happens to be our partner, Agent X, and now we are being suspected as a traitor as well. Since we are highly skilled, Headquarters knows that the Lie Detector won’t work on us, but we have been placed off-duty until we can prove that we are innocent.
 
-Before we were removed from duty, we were able to use the Lie Detector to find out that the enemy has thousands of civilians under control in a secret Discord server. The civilians are being brainwashed with enemy propaganda every day. To prove our innocence, we decide to go undercover and infiltrate the enemy’s Discord server. With the help of Agent X, we have been added to the server as an administrator. Our plan is to create and install a Discord bot that automates encrypted messages to the civilians and alerts them about the situation so that they can escape.
+Before we were removed from duty, we were able to use the Lie Detector to find out that the enemy had thousands of civilians under control in a secret Discord server. The civilians are being brainwashed with enemy propaganda every day. To prove our innocence, we decide to go undercover and infiltrate the enemy’s Discord server. With the help of Agent X, we have been added to the server as an administrator. Our plan is to create and install a Discord bot that automates encrypted messages to the civilians and alerts them about the situation so that they can escape.
 
 ## Let’s Build
 
@@ -62,14 +62,14 @@ Today, we will be building this with Node.js. If you’re curious about how to b
     - Click on “New Application” within the [Discord Developer Dashboard](https://discord.com/developers/applications).
     - Type the app’s name and click “Create”.
     - In the left menu, open the “Bot” page and click “Add Bot”. We can update the icon and username (bot icon file can be found in the GitHub linked above).
-- Once the bot has been created, copy the bot token provide and paste it in Courier (make sure to keep this token private).
+- Once the bot has been created, copy the bot token provided and paste it in Courier (make sure to keep this token private).
 - We will need to give this application permission to post as the bot within our server. Check out the [Bot permissions documentation](https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions).
     - Within the application, head over to OAuth2 and click on URL generator
     - Select the `bot` scope
     - Select the following permissions: `View Channels`, `Send Messages`, and `Read Message History`
     - Go to the generated URL below. This URL will invite the bot to the server and authorize it with the permissions chosen.
 - On Discord, click on User Settings (next to username on the bottom left). Access the Advanced settings page and enable Developer Mode ✅.
-- Back in the Discord server, right click on channel and copy the channel ID (bottom of list). Add this as the value of `channel_id` in the .env file within the project.
+- Back in the Discord server, right click on the channel and copy the channel ID (bottom of list). Add this as the value of `channel_id` in the .env file within the project.
 
 Now, Courier has access to sending messages to this server as the bot.
 
@@ -158,14 +158,14 @@ Now, Courier has access to sending messages to this server as the bot.
 
 [Check out the Automations API reference >](https://www.courier.com/docs/reference/automation/invoke/)
 
-- Create a new asynchronous function called `runDiscordAutomation()`, which will call the `encryptMessage()` function to translate a message and use the Courier API to automatically send messages in the enemy Discord server everyday.
+- Create a new asynchronous function called `runDiscordAutomation()`, which will call the `encryptMessage()` function to translate a message and use the Courier API to automatically send messages to the enemy Discord server everyday.
     
     ```
     async function runDiscordAutomation() {
     }
     ```
     
-- Before we can run our message through the Morse translation API, we need to ensure that our it is in the correct format, with all spaces converted into their URL encoding, `%20` as shown below. We can call `encryptMessage()` with `originalMessage` as a parameter to translate it. `encryptedMessage` will evaluate as the translated message.
+- Before we can run our message through the Morse translation API, we need to ensure that it is in the correct format, with all spaces converted into their URL encoding, `%20` as shown below. We can call `encryptMessage()` with `originalMessage` as a parameter to translate it. `encryptedMessage` will evaluate as the translated message.
     
     ```jsx
     const originalMessage = "run%20while%20you%20can%20you%20can%20find%20shelter%20here:%20https://discord.com/invite/courier";
@@ -201,7 +201,7 @@ Now, Courier has access to sending messages to this server as the bot.
     }),
     ```
     
-    - The `automation` object will include a `steps` array, which will consists of all steps required for the automation. Our automation consists of reminders that are sent once a day - in this case we will be adding three steps: a send step, a delay, and another send step (so on).
+    - The `automation` object will include a `steps` array, which will consist of all steps required for the automation. Our automation consists of reminders that are sent once a day - in this case we will be adding three steps: a send step, a delay, and another send step (so on).
         
         ```json
         "automation": {
@@ -267,10 +267,11 @@ Our Discord bot is ready to save some civilians. Try building a Discord bot of y
 
 🔗 Register for the Hackathon: [https://courier-hacks.devpost.com/](https://courier-hacks.devpost.com/)
 
-🔗 Discord Application and Bot Guide: [https://discord.com/developers/docs/getting-started](https://discord.com/developers/docs/getting-started)
+🔗 Discord Application and Bot Guide: [https://discord.com/developers/docs/getting-started](https://discord.com/developers/docs/getting-started)
 
-🔗 Courier Discord Provider Docs: [https://www.courier.com/docs/guides/providers/direct-message/discord/](https://www.courier.com/docs/guides/providers/direct-message/discord/)
+🔗 Courier Discord Provider Docs: [https://www.courier.com/docs/guides/providers/direct-message/discord/](https://www.courier.com/docs/guides/providers/direct-message/discord/)
 
 🔗 Courier Automations Docs: [https://www.courier.com/docs/automations/](https://www.courier.com/docs/automations/)
 
-🔗 Courier Automations API Reference: [https://www.courier.com/docs/reference/](https://www.courier.com/docs/reference/)
+🔗 Courier Automations API Reference: [https://www.courier.com/docs/reference/](https://www.courier.com/docs/reference/)
+
