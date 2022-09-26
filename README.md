@@ -49,7 +49,7 @@ Today, we will be building this with Node.js. If you’re curious about how to b
     
     Import and configure dotenv by adding to top of index.js: `require("dotenv").config();`
     
-- Similarly, install [node-fetch npm package](https://www.npmjs.com/package/node-fetch) to store variables: `npm install node-fetch@2`
+- Similarly, install [node-fetch npm package](https://www.npmjs.com/package/node-fetch) to make API calls: `npm install node-fetch@2`
     
     Import and configure node-fetch by adding to top of index.js: `const fetch = require("node-fetch");`
     
@@ -69,7 +69,11 @@ Today, we will be building this with Node.js. If you’re curious about how to b
     - Select the following permissions: `View Channels`, `Send Messages`, and `Read Message History`
     - Go to the generated URL below. This URL will invite the bot to the server and authorize it with the permissions chosen.
 - On Discord, click on User Settings (next to username on the bottom left). Access the Advanced settings page and enable Developer Mode ✅.
-- Back in the Discord server, right click on the channel and copy the channel ID (bottom of list). Add this as the value of `channel_id` in the .env file within the project.
+- Back in the Discord server, right click on the channel and copy the channel ID (bottom of list). Add this as the value of `channelID` in the .env file within the project and save it as a variable within the index.js file:
+    
+    ```json
+    const channelID = process.env.channelID
+    ```
 
 Now, Courier has access to sending messages to this server as the bot.
 
@@ -82,7 +86,11 @@ Now, Courier has access to sending messages to this server as the bot.
     ![discord chat](https://user-images.githubusercontent.com/28051494/192195325-4fba001f-0e75-4205-a40a-2369ffe89515.gif)
     
 - Write and publish the message. We need to create a clear message that will indicate to our civilians how to escape. Our message will be: `Run while you can. You can find shelter here: https://discord.com/invite/courier.`
-- Copy the notification template ID from the notification’s settings and add it as the value of `templateID` in the .env file within the project.
+- Copy the notification template ID from the notification’s settings and add it as the value of `templateID` in the .env file within the project and save it as a variable within the index.js file:
+    
+    ```json
+    const templateID = process.env.templateID
+    ```
     
     ![notif publish and id](https://user-images.githubusercontent.com/28051494/192195328-adad37db-52e6-4f72-b16f-f2ef45ae2121.gif)
     
@@ -152,6 +160,8 @@ Now, Courier has access to sending messages to this server as the bot.
     ```
     ![discord unencrypted](https://user-images.githubusercontent.com/28051494/192218535-d4cce1f6-3b57-4d7c-b577-bb3d3ba68b7f.png)
 
+*NOTE: The Morse API has a rate limit, which may give you an error if you run it too many times within the hour. In this case, you will have to wait for some time before continuing.*
+
 ### Part 5: Automate Messages
 
 [Learn about Automations >](https://www.courier.com/docs/automations/)
@@ -168,11 +178,13 @@ Now, Courier has access to sending messages to this server as the bot.
 - Before we can run our message through the Morse translation API, we need to ensure that it is in the correct format, with all spaces converted into their URL encoding, `%20` as shown below. We can call `encryptMessage()` with `originalMessage` as a parameter to translate it. `encryptedMessage` will evaluate as the translated message.
     
     ```jsx
-    const originalMessage = "run%20while%20you%20can%20you%20can%20find%20shelter%20here:%20https://discord.com/invite/courier";
+    const originalMessage = "run%20while%20you%20can%20you%20can%20find%20shelter%20here";
     const encryptedMessage = await encryptMessage(originalMessage);
     ```
     
-- Let’s define the Courier Automation endpoint and options:
+- Add the link to the safe server in the notification template within the designer: “[https://discord.com/invite/courier](https://discord.com/invite/courier)”
+
+- Let’s define the Courier Automation endpoint and options. Here we will need access to our Courier API Key, which can be found within the [Courier Settings page](https://app.courier.com/settings/api-keys). Save the first value in the .env file as apiKey and access it in this file as process.env.apiKey.
     
     ```jsx
     const automationsEndpoint = "https://api.courier.com/automations/invoke"
@@ -182,7 +194,7 @@ Now, Courier has access to sending messages to this server as the bot.
     	headers: {
     		Accept: "application/json",
     		"Content-Type": "application/json",
-    		Authorization: 'Bearer ' + apiKey
+    		Authorization: 'Bearer ' + process.env.apiKey
     	},
     	body: JSON.stringify({
     		//next steps
@@ -219,7 +231,7 @@ Now, Courier has access to sending messages to this server as the bot.
         		"template": templateID,
         		"to": {
         			"discord": {
-        				"channel_id": channel_id
+        				"channel_id": process.env.channelID
         			}
         		}
         	}
@@ -242,7 +254,7 @@ Now, Courier has access to sending messages to this server as the bot.
         ```
         
     - [Learn more about sending to a channel via Courier >](https://www.courier.com/docs/guides/providers/direct-message/discord/#sending-a-message-to-a-channel)
-- For testing purposes, it’s easier to either remove 1 delay step or keep it at a small period like `1 minute` or `5 seconds`
+- For testing purposes, it’s easier to either remove 1 delay step or keep it at a short period like `1 minute`
 - Finally, we can use node-fetch again to call the Automations API and trigger this automation
     
     ```jsx
