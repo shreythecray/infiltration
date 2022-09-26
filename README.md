@@ -1,3 +1,5 @@
+# Infiltrate a Discord Server with Automated Encrypted Messages with Node.js
+
 ## Before Starting
 
 Follow along with the video tutorial: [tutorial embed]
