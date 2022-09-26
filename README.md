@@ -150,7 +150,7 @@ Now, Courier has access to sending messages to this server as the bot.
     console.log(encryptedMessage);
     return encryptedMessage;
     ```
-    
+    ![discord unencrypted](https://user-images.githubusercontent.com/28051494/192218535-d4cce1f6-3b57-4d7c-b577-bb3d3ba68b7f.png)
 
 ### Part 5: Automate Messages
 
