@@ -264,6 +264,7 @@ Now, Courier has access to sending messages to this server as the bot.
         .catch((err) => console.error(err));
     ```
     
+    ![encrypted message](https://user-images.githubusercontent.com/28051494/192239581-f78f8c7f-a108-4672-9ad2-cb8b16991352.png)
 
 ## Conclusion
 
