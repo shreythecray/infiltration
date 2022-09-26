@@ -4,7 +4,7 @@ GitHub Repository: [https://github.com/shreythecray/infiltration](https://github
 
 Follow along with the video tutorial: [tutorial embed]
 
-We just launched our first hackathon and are giving away over $1K in prizes! Join us in building a cool project and winning any of the following prizes. 🏆
+**The hackathon ends soon**, and we are giving away over $1K in prizes! Join us in building a cool project and winning any of the following prizes. 🏆
 
 - **Courier Hacks 1st Place:** Top submission for use for notifications and demonstration of proper app-to-user notifications with the Courier API will receive $1000 via Zelle or PayPal.
 - **Courier Hacks 2nd Place:** 2nd Place submission for use for notifications and demonstration of proper app-to-user notifications with the Courier API will receive the Apple AirPods Pro.
