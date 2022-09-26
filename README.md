@@ -79,12 +79,12 @@ Now, Courier has access to sending messages to this server as the bot.
 - Add the Chat notification channel with Discord as the provider
 - Select on the Chat channel on the right to edit the message
     
-    ![discord chat.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/19363d42-c928-459c-a552-8f509e984e0c/discord_chat.gif)
+    ![discord chat](https://user-images.githubusercontent.com/28051494/192195325-4fba001f-0e75-4205-a40a-2369ffe89515.gif)
     
 - Write and publish the message. We need to create a clear message that will indicate to our civilians how to escape. Our message will be: `Run while you can. You can find shelter here: https://discord.com/invite/courier.`
 - Copy the notification template ID from the notification’s settings and add it as the value of `templateID` in the .env file within the project.
     
-    ![notif publish and id.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5e53234f-19c2-4605-823a-e669eed22057/notif_publish_and_id.gif)
+    ![notif publish and id](https://user-images.githubusercontent.com/28051494/192195328-adad37db-52e6-4f72-b16f-f2ef45ae2121.gif)
     
 - Create a test event and replace the `channel_id` in the JSON with the `channel_id` we received from Discord earlier.
     
@@ -103,11 +103,11 @@ Now, Courier has access to sending messages to this server as the bot.
     
 - Test a test message to ensure that the Discord provider integration is working correctly.
     
-    ![send test.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/87f26386-4c85-4450-abc2-f3a02bbf0632/send_test.gif)
+    ![send test](https://user-images.githubusercontent.com/28051494/192195329-b892acb5-7b6e-4c1d-97f0-fa274cf2e501.gif)
     
 - Replace the message with a variable `{secretMessage}` so that, later, we can edit the message from our code directly.
     
-    ![variable.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/18d9a89f-5e83-4aa6-afb4-b8602ef84ab7/variable.png)
+    ![variable.png](https://user-images.githubusercontent.com/28051494/192195335-fed2a556-b3ba-4c49-931a-e5c42fb6d87e.png)
     
 
 ### Part 4: Encrypt Message with the Morse API
