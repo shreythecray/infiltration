@@ -1,7 +1,5 @@
 ## Before Starting
 
-GitHub Repository: [https://github.com/shreythecray/infiltration](https://github.com/shreythecray/infiltration)
-
 Follow along with the video tutorial: [tutorial embed]
 
 **The hackathon ends soon**, and we are giving away over $1K in prizes! Join us in building a cool project and winning any of the following prizes. 🏆
@@ -61,7 +59,7 @@ Today, we will be building this with Node.js. If you’re curious about how to b
 - In order to access a Discord bot token, we’ll create a Discord application and add a Discord bot.
     - Click on “New Application” within the [Discord Developer Dashboard](https://discord.com/developers/applications).
     - Type the app’s name and click “Create”.
-    - In the left menu, open the “Bot” page and click “Add Bot”. We can update the icon and username (bot icon file can be found in the GitHub linked above).
+    - In the left menu, open the “Bot” page and click “Add Bot”. We can update the icon and username (bot icon file can be found in the files here).
 - Once the bot has been created, copy the bot token provided and paste it in Courier (make sure to keep this token private).
 - We will need to give this application permission to post as the bot within our server. Check out the [Bot permissions documentation](https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions).
     - Within the application, head over to OAuth2 and click on URL generator
@@ -258,8 +256,6 @@ Now, Courier has access to sending messages to this server as the bot.
 Our Discord bot is ready to save some civilians. Try building a Discord bot of your own and tweet a screenshot of your Courier automated messages in action, and we will send a gift to the first three Secret Agents to complete this task! Head to [courier.com/hack-now](http://courier.com/hack-now) to get started. Don’t forget to submit your project to our [Hackathon](https://courier-hacks.devpost.com/) for a chance to win over $1000 in cash and prizes!
 
 ### Quick Links
-
-🔗 GitHub Repository: [https://github.com/shreythecray/infiltration](https://github.com/shreythecray/infiltration)
 
 🔗 Video tutorial: TBD
 
