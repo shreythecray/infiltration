@@ -51,21 +51,21 @@ async function runDiscordAutomation() {
                     }
                   }
               },
-            //   {
-            //       "action":"delay",
-            //       "duration":"1 minute"
-            //     },
-            //   {
-            //     "action": "send",
-            //     "message": {
-            //         "template": templateID,
-            //         "to": {
-            //           "discord": {
-            //             "channel_id": channel_id
-            //           }
-            //         }
-            //       }
-            //   }
+              {
+                  "action":"delay",
+                  "duration":"1 day"
+                },
+              {
+                "action": "send",
+                "message": {
+                    "template": templateID,
+                    "to": {
+                      "discord": {
+                        "channel_id": channel_id
+                      }
+                    }
+                  }
+              }
             ],
           },
           "data": {
@@ -74,11 +74,10 @@ async function runDiscordAutomation() {
     }),
   };
 
-  const courierResponse = fetch(automationsEndpoint, courierOptions)
-    // .then((response) => response.json())
-    // .then((response) => console.log(response))
-    // .catch((err) => console.error(err));
-//   console.log(courierResponse)
+  fetch(automationsEndpoint, courierOptions)
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch((err) => console.error(err));
 }
 
 runDiscordAutomation();

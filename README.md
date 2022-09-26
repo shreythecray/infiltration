@@ -1,6 +1,4 @@
-# Create a Discord Bot that Automates Secret Messages with Node.js
-
-## Before You Start
+## Before Starting
 
 GitHub Repository: [https://github.com/shreythecray/infiltration](https://github.com/shreythecray/infiltration)
 
@@ -29,20 +27,24 @@ Last time, headquarters told us that one of our spies had leaked sensitive, top-
 
 ### What’s Next:
 
-You have successfully identified the mule and have alerted your spy network! In an unfortunate turn of events, the mule happens to be your partner, Agent X, and now you are being suspected as a traitor as well. Since you are highly skilled, Headquarters knows what the Lie Detector won’t work on you, but you have been placed off-duty until you can prove that you are innocent.
+We have successfully identified the mule and have alerted our spy network! In an unfortunate turn of events, the mule happens to be our partner, Agent X, and now we are being suspected as a traitor as well. Since we are highly skilled, Headquarters knows what the Lie Detector won’t work on us, but we have been placed off-duty until we can prove that we are innocent.
 
-Before you were removed from duty, you were able to use your Lie Detector to find out that the enemy has thousands of civilians under control in a secret Discord server. The civilians are being brainwashed with enemy propaganda every day. To prove your innocence, you decide to go undercover and infiltrate the enemy’s Discord server. With the help of Agent X, you have been added to the server as an administrator. Your plan is to create and install a Discord bot that automates encrypted messages to the civilians and alerts them about the situation so that they can escape.
+Before we were removed from duty, we were able to use the Lie Detector to find out that the enemy has thousands of civilians under control in a secret Discord server. The civilians are being brainwashed with enemy propaganda every day. To prove our innocence, we decide to go undercover and infiltrate the enemy’s Discord server. With the help of Agent X, we have been added to the server as an administrator. Our plan is to create and install a Discord bot that automates encrypted messages to the civilians and alerts them about the situation so that they can escape.
+
+## Let’s Build
 
 ### Pre-reqs:
 
 - Admin access to a Discord server
-- A cool undercover Agent name for your Discord bot
-- Optional: a cool undercover Agent profile picture for your Discord bot
+- A cool undercover Agent name for our Discord bot
+- Optional: a cool undercover Agent profile picture for our Discord bot
 
 ### Part 1: Set Up Node.js Project
 
-- Create a new project
-- Create three new files: “index.js”, “.env”, and “.gitignore”
+Today, we will be building this with Node.js. If you’re curious about how to build this project using Ruby, cURL, Powershell, Go, PHP, Python, or Java, let us know: `https://discord.com/invite/courier`. You can also access code for these within our [API reference](https://www.courier.com/docs/reference/automation/invoke/). Let’s get started:
+
+- Create a new project folder.
+- Create three new files: “index.js”, “.env”, and “.gitignore”.
 - Install [dotenv npm package](https://www.npmjs.com/package/dotenv) to store variables: `npm install dotenv --save`
     
     Import and configure dotenv by adding to top of index.js: `require("dotenv").config();`
@@ -51,38 +53,62 @@ Before you were removed from duty, you were able to use your Lie Detector to fin
     
     Import and configure node-fetch by adding to top of index.js: `const fetch = require("node-fetch");`
     
-- 
 
 ### Part 2: Create a Discord Bot
 
 - [Sign up for (or log into) Courier >](https://courier.com/hack-now)
-    
-    [Discord docs on Courier >](https://www.courier.com/docs/guides/providers/direct-message/discord/)
-    
-- Open Discord provider in Channels > need bot token
-- Create a Discord application
-- Add Discord bot
-- Copy bot token and paste it in Courier (keep token private)
-- Give application permission to post as bot in your server
-- Bot permissions: [https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions](https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions)
-    - OAuth2 > URL generator
-    - Scope: bot
-    - Permissions: View Channels, Send Messages, Read Message History
-    - Go to generated URL
-    - Invite to server to authorize
-- Set up Discord provider in Courier
+- Open Discord provider in Channels. Here we will need our Discord bot token to continue.
+- In order to access a Discord bot token, we’ll create a Discord application and add a Discord bot.
+    - Click on “New Application” within the [Discord Developer Dashboard](https://discord.com/developers/applications).
+    - Type the app’s name and click “Create”.
+    - In the left menu, open the “Bot” page and click “Add Bot”. We can update the icon and username (bot icon file can be found in the GitHub linked above).
+- Once the bot has been created, copy the bot token provide and paste it in Courier (make sure to keep this token private).
+- We will need to give this application permission to post as the bot within our server. Check out the [Bot permissions documentation](https://discord.com/developers/docs/getting-started#adding-scopes-and-permissions).
+    - Within the application, head over to OAuth2 and click on URL generator
+    - Select the `bot` scope
+    - Select the following permissions: `View Channels`, `Send Messages`, and `Read Message History`
+    - Go to the generated URL below. This URL will invite the bot to the server and authorize it with the permissions chosen.
+- On Discord, click on User Settings (next to username on the bottom left). Access the Advanced settings page and enable Developer Mode ✅.
+- Back in the Discord server, right click on channel and copy the channel ID (bottom of list). Add this as the value of `channel_id` in the .env file within the project.
+
+Now, Courier has access to sending messages to this server as the bot.
 
 ### Part 3: Send Messages
 
-- Go to Courier’s notification designer
-- Create a new notification
-- Add the Push notification channel with Discord as the provider
-- Click on the Push channel to edit the message
-- Write and publish your message
-- Copy notification template ID from notifications setting > add as `templateID` in .env file
-- Profile settings > Advanced > Developer Mode ✅ > right click on channel and copy ID > add as `channel_id` in .env
-
-Our message will be:
+- Create a new notification within the [Notification Designer](https://app.courier.com/designer)
+- Add the Chat notification channel with Discord as the provider
+- Select on the Chat channel on the right to edit the message
+    
+    ![discord chat.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/19363d42-c928-459c-a552-8f509e984e0c/discord_chat.gif)
+    
+- Write and publish the message. We need to create a clear message that will indicate to our civilians how to escape. Our message will be: `Run while you can. You can find shelter here: https://discord.com/invite/courier.`
+- Copy the notification template ID from the notification’s settings and add it as the value of `templateID` in the .env file within the project.
+    
+    ![notif publish and id.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5e53234f-19c2-4605-823a-e669eed22057/notif_publish_and_id.gif)
+    
+- Create a test event and replace the `channel_id` in the JSON with the `channel_id` we received from Discord earlier.
+    
+    ```json
+    {
+      "courier": {},
+      "data": {},
+      "profile": {
+        "discord": {
+          "channel_id": "768866348853383208"
+        }
+      },
+      "override": {}
+    }
+    ```
+    
+- Test a test message to ensure that the Discord provider integration is working correctly.
+    
+    ![send test.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/87f26386-4c85-4450-abc2-f3a02bbf0632/send_test.gif)
+    
+- Replace the message with a variable `{secretMessage}` so that, later, we can edit the message from our code directly.
+    
+    ![variable.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/18d9a89f-5e83-4aa6-afb4-b8602ef84ab7/variable.png)
+    
 
 ### Part 4: Encrypt Message with the Morse API
 
@@ -111,9 +137,9 @@ Our message will be:
     const morseEndpoint = "https://api.funtranslations.com/translate/morse.json?text="+originalMessage
     ```
     
-- You need to be able to access the translation from this API call in the body of the Courier API call. To call the API, we can use node-fetch as we did before.
+- We need to be able to access the translation from this API call in the body of the Courier API call. To call the API, we can use node-fetch as we did before.
     - Create a variable called `morseResponse`, which will hold the entire response from this call.
-    - Convert the JSON object into a JavaScript object `morseResponseJSON` so that you can read it within your code.
+    - Convert the JSON object into a JavaScript object `morseResponseJSON` so that we can read it within our code.
     - Get the translated message out of that object and save it in a new variable called `encryptedMessage`.
     - Return `encryptedMessage` so that we can call this function to access it elsewhere.
     
@@ -159,23 +185,73 @@ Our message will be:
     		Authorization: 'Bearer ' + apiKey
     	},
     	body: JSON.stringify({
-    		//automation steps
+    		//next steps
     	}),
     };
     ```
     
 - The body object within the options will encompass two objects: `automation` and `data`
+    
+    ```json
+    body: JSON.stringify({
+    	"automation": {
+    	},
+    	"data": {
+    	} 
+    }),
+    ```
+    
     - The `automation` object will include a `steps` array, which will consists of all steps required for the automation. Our automation consists of reminders that are sent once a day - in this case we will be adding three steps: a send step, a delay, and another send step (so on).
-    - Each step will need to be defined with two objects: the type of `action` (send, delay, cancel, etc.) and `message`. The `message` consists of the notification template ID (we saved this in the .env file earlier) and information about where you are sending this message. A Discord message requires either a `user_id` or a `channel_id`. In order to reach as many innocent civilians as possible, as quickly as possible, we will directly send messages in a channel.
+        
+        ```json
+        "automation": {
+        	"steps": [],
+        },
+        ```
+        
+    - Each step will need to be defined with two objects: the type of `action` (send, delay, cancel, etc.) and `message`. The `message` consists of the notification template ID (we saved this in the .env file earlier) and information about where this message is being sent. A Discord message requires either a `user_id` or a `channel_id`. In order to reach as many innocent civilians as possible, as quickly as possible, we will directly send messages in a channel.
+    - This is what the send and delay steps would look like:
+        
+        ```json
+        {
+        	"action": "send",
+        	"message": {
+        		"template": templateID,
+        		"to": {
+        			"discord": {
+        				"channel_id": channel_id
+        			}
+        		}
+        	}
+        },
+        ```
+        
+        ```json
+        {
+        	"action": "send",
+        	"duration":"1 day"
+        },
+        ```
+        
+    - The data object would need to contain the `encryptedMessage`:
+        
+        ```jsx
+        "data": {
+        	"secretMessage": encryptedMessage
+        }
+        ```
+        
     - [Learn more about sending to a channel via Courier >](https://www.courier.com/docs/guides/providers/direct-message/discord/#sending-a-message-to-a-channel)
-- 
-- Add a send step
-- Add a delay step - 1 minute for testing (you can also leave this out to save time during testing and add it later)
-- Add another send step - we can use the same notification template ID for both send steps, and use the data to update the message itself
-
-```jsx
-const courierResponse = fetch(automationsEndpoint, courierOptions)
-```
+- For testing purposes, it’s easier to either remove 1 delay step or keep it at a small period like `1 minute` or `5 seconds`
+- Finally, we can use node-fetch again to call the Automations API and trigger this automation
+    
+    ```jsx
+    fetch(automationsEndpoint, courierOptions)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
+    ```
+    
 
 ## Conclusion
 
@@ -191,10 +267,10 @@ Our Discord bot is ready to save some civilians. Try building a Discord bot of y
 
 🔗 Register for the Hackathon: [https://courier-hacks.devpost.com/](https://courier-hacks.devpost.com/)
 
-🔗 Courier Discord Provider Docs: 
+🔗 Discord Application and Bot Guide: [https://discord.com/developers/docs/getting-started](https://discord.com/developers/docs/getting-started)
 
-🔗 Courier Automations Docs:
+🔗 Courier Discord Provider Docs: [https://www.courier.com/docs/guides/providers/direct-message/discord/](https://www.courier.com/docs/guides/providers/direct-message/discord/)
+
+🔗 Courier Automations Docs: [https://www.courier.com/docs/automations/](https://www.courier.com/docs/automations/)
 
 🔗 Courier Automations API Reference: [https://www.courier.com/docs/reference/](https://www.courier.com/docs/reference/)
-
-🔗 Discord Application and Bot Guide:
